@@ -1,19 +1,4 @@
-# backgroundsystem
+#### 项目初衷
+- 搭建一个由'vuecli3.x'、'vue2.x'、'vue全家桶'、'element-UI' 构建的项目
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+#### 项目结构
