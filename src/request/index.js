@@ -19,10 +19,12 @@ request.interceptors.request.use(
 
 // 响应拦截器
 request.interceptors.response.use(
-  function (res) {
-    return res.data;
+    (res) => {
+    if(res.status === 200){
+      return res.data;
+    }
   },
-  function (error) {
+  (error) => {
     return Promise.reject(error);
   }
 );

@@ -1,17 +1,32 @@
 import Vue from 'vue';
-import home from './home'
 import VueRouter from 'vue-router';
+
+// import layout from './layout'
 Vue.use(VueRouter);
+
+
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 
 const router = new VueRouter({
     mode: "history",
-    // 路由匹配规则
     routes: [
       {
-        path:'/',
-        redirect:'/home'
+        path: '/',
+        redirect: '/layout'
       },
-      ...home
+      {
+        path: '/layout',
+        component: () => import(/* webpackChunkName: "layout" */ '@/views/layout'),
+        children:[
+          {
+            path:'/layout/home',
+            component:() => import(/* webpackChunkName: "layout" */ '@/views/home')
+          }
+        ]
+      }
     ]
 });
 
