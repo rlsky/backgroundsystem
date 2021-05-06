@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-// import layout from './layout'
+import layout from './layout'
 Vue.use(VueRouter);
 
 
@@ -17,16 +17,7 @@ const router = new VueRouter({
         path: '/',
         redirect: '/layout'
       },
-      {
-        path: '/layout',
-        component: () => import(/* webpackChunkName: "layout" */ '@/views/layout'),
-        children:[
-          {
-            path:'/layout/home',
-            component:() => import(/* webpackChunkName: "layout" */ '@/views/home')
-          }
-        ]
-      }
+      ...layout
     ]
 });
 

@@ -25,7 +25,7 @@ export default {
 /* 头部样式 */
 .app-header {
   position: absolute;
-  line-height: 50px;
+  line-height: 60px;
   top: 0px;
   left: 0px;
   right: 0px;

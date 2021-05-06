@@ -5,7 +5,7 @@ export default [
     component: () => import(/* webpackChunkName: "layout" */ '@/views/layout'),
     children:[
       {
-        path:'home',
+        path:'/layout/home',
         component:() => import(/* webpackChunkName: "layout" */ '@/views/home')
       }
     ]

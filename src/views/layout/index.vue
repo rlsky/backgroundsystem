@@ -1,18 +1,39 @@
 <!--  -->
 <template>
-  <div>
-    <Appheader />
-    <Navbar />
-    <div class="main">
-      <router-view></router-view>
-    </div>
-  </div>
+
+  <el-container>
+    <el-header>
+      <Appheader />
+    </el-header>
+    <el-container>
+      <el-aside width="200px">
+        <!--左侧菜单组件-->
+        <el-menu
+          router="router"
+          default-active="0"
+          class="el-menu-vertical-demo"
+          @select="menuSelected"
+          background-color="#F0F6F6"
+          text-color="#3C3F41"
+          active-text-color="black">
+          <Navbar :navMenus="leftMenus"></Navbar>
+        </el-menu>
+      </el-aside>
+      <el-main>
+        <div  v-if="$route.path === '/' || $route.path === '/layout'">
+          欢迎来到后管理系统
+        </div>
+        <router-view v-else></router-view>
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
 <script>
 import {getWeather} from '@/api/index'
 import Navbar from '@/components/navbar'
 import Appheader from '@/components/appheader'
+import tablist from './tablist.json'
 export default {
   name:'layout',
   components:{
@@ -21,13 +42,19 @@ export default {
   },
   data () {
     return {
-      weatherCon:{}
+      weatherCon:{},
+      leftMenus:{}
     }
   },
   created(){
+    console.log(tablist)
+    this.leftMenus=tablist.childs
     this.getWeather()
   },
   methods: {
+    menuSelected(e){
+      console.log('什么贵',e)
+    },
     async getWeather(){
       let result=await getWeather({
         app:'weather.today',
@@ -46,13 +73,10 @@ export default {
 <style lang='scss' scoped>
 
   /* 主区域 */
-  .main {
-    position: absolute;
-    top: 50px;
-    left: 200px;
-    bottom: 0px;
-    right: 0px;  /* 距离右边0像素 */
-    padding: 10px;
-    overflow-y: auto; /* 当内容过多时y轴出现滚动条 */
+  .el-menu {
+    height: 100%;
+  }
+  .el-container{
+    height: 100vh
   }
 </style>

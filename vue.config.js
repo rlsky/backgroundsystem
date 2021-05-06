@@ -11,7 +11,7 @@ module.exports = {
     }
   },
   // 默认: '/'，代表绝对路径，该值也可以被设置为空字符串 ('') 或是相对路径 ('./')，这样所有的资源都会被链接为相对路径，这样打出来的包可以被部署在任意路径。
-  publicPath:"./",
+  publicPath:"/",
   // 打包后输出的文件名称，默认为'dist'
   outputDir:"dist",
   // 指定生成的 index.html 的输出路径 (相对于 outputDir)。也可以是一个绝对路径，默认'index.html'。
