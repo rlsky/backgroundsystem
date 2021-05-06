@@ -1,4 +1,15 @@
 module.exports = {
+  css: {
+    loaderOptions: {
+      sass: {
+        //依次导入的公用的scss变量，公用的scss混入，公用的默认样式
+        prependData: `
+          @import "~@/assets/scss/variable.scss";
+          @import "~@/assets/scss/mixin.scss";
+        `
+      }
+    }
+  },
   // 默认: '/'，代表绝对路径，该值也可以被设置为空字符串 ('') 或是相对路径 ('./')，这样所有的资源都会被链接为相对路径，这样打出来的包可以被部署在任意路径。
   publicPath:"./",
   // 打包后输出的文件名称，默认为'dist'
