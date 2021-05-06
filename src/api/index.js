@@ -1,6 +1,6 @@
 import request from '@/request/index'
 
-// 成员管理-重置密码
+// 获取天气
 export function getWeather (data) {
   return request({
     url: '',

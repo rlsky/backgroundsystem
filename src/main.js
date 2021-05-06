@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import router from './router/index.js';
+import Fragment from 'vue-fragment'
 import App from './App.vue'
 
 import {
@@ -154,7 +155,7 @@ Vue.use(Calendar);
 Vue.use(Backtop);
 Vue.use(PageHeader);
 Vue.use(CascaderPanel);
-
+Vue.use(Fragment.Plugin)
 Vue.use(Loading.directive);
 
 Vue.prototype.$loading = Loading.service;

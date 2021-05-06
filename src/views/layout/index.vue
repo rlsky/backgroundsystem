@@ -1,4 +1,3 @@
-<!--  -->
 <template>
 
   <el-container>
@@ -7,7 +6,6 @@
     </el-header>
     <el-container>
       <el-aside width="200px">
-        <!--左侧菜单组件-->
         <el-menu
           router="router"
           default-active="0"
@@ -30,7 +28,7 @@
 </template>
 
 <script>
-import {getWeather} from '@/api/index'
+import { getWeather } from '@/api/index'
 import Navbar from '@/components/navbar'
 import Appheader from '@/components/appheader'
 import tablist from './tablist.json'
@@ -47,13 +45,12 @@ export default {
     }
   },
   created(){
-    console.log(tablist)
     this.leftMenus=tablist.childs
     this.getWeather()
   },
   methods: {
     menuSelected(e){
-      console.log('什么贵',e)
+      console.log(e)
     },
     async getWeather(){
       let result=await getWeather({
@@ -71,12 +68,10 @@ export default {
 
 </script>
 <style lang='scss' scoped>
-
-  /* 主区域 */
-  .el-menu {
-    height: 100%;
-  }
   .el-container{
     height: 100vh
+  }
+  .el-menu {
+    height: 100%;
   }
 </style>

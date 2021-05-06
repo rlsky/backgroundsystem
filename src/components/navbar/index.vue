@@ -1,7 +1,6 @@
 <template>
-  <div class="navMenu">
-
-    <label v-for="navMenu in navMenus">
+  <fragment>
+    <template v-for="navMenu in navMenus">
       <el-menu-item v-if="navMenu.childs==null&&navMenu.entity&&navMenu.entity.state==='ENABLE'"
         :key="navMenu.entity.id" :data="navMenu" :index="navMenu.entity.name" @click="toPath(navMenu.entity.value)" :route="navMenu.entity.value">
         <i :class="navMenu.entity.icon"></i>
@@ -16,9 +15,8 @@
         </template>
         <Navbar :navMenus="navMenu.childs"></Navbar>
       </el-submenu>
-    </label>
-
-  </div>
+    </template>
+  </fragment>
 </template>
 
 <script>
