@@ -18,8 +18,8 @@
         </el-menu>
       </el-aside>
       <el-main>
-        <div  v-if="$route.path === '/' || $route.path === '/layout'">
-          欢迎来到后管理系统
+        <div class="welcom" v-if="$route.path === '/' || $route.path === '/layout'">
+          欢迎来到<span class="testfont">后台管理系统</span>
         </div>
         <router-view v-else></router-view>
       </el-main>
@@ -73,5 +73,17 @@ export default {
   }
   .el-menu {
     height: 100%;
+  }
+  .welcom{
+    font-size: 28px;
+    font-family: 'HYRunYuan-EEW';
+    font-weight: normal;
+    color: #97999B;
+    .testfont{
+      font-family: 'HYRunYuan-FEW';
+      font-size: 36px;
+      font-weight: normal;
+      color: #8B8075;
+    }
   }
 </style>

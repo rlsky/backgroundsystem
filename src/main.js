@@ -2,6 +2,7 @@ import Vue from 'vue'
 import router from './router/index.js';
 import Fragment from 'vue-fragment'
 import App from './App.vue'
+import './assets/fonts/fonts.css'
 
 import {
   Pagination,
