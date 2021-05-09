@@ -7,7 +7,11 @@ export default [
       {
         path:'/layout/home',
         component:() => import(/* webpackChunkName: "layout" */ '@/views/home')
-      }
+      },
+      {
+        path:'/layout/Information',
+        component:() => import(/* webpackChunkName: "layout" */ '@/views/Information')
+      },
     ]
   }
 ]

@@ -38,10 +38,10 @@
                       "parentMenuId": 1,
                       "name": "authManage",
                       "icon": "el-icon-loading",
-                      "alias": "权限管理",
+                      "alias": "mock数据",
                       "state": "ENABLE",
                       "sort": 0,
-                      "value": "/system/auth",
+                      "value": "/layout/Information",
                       "type": "LINK",
                       "discription": "用于权限管理的菜单",
                       "createUserId": 1

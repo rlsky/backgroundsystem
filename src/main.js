@@ -167,6 +167,7 @@ Vue.prototype.$prompt = MessageBox.prompt;
 Vue.prototype.$notify = Notification;
 Vue.prototype.$message = Message;
 Vue.config.productionTip = false
+require('./mock/mock')
 
 new Vue({
   router,
