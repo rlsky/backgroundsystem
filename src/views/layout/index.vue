@@ -1,10 +1,12 @@
 <template>
 
   <el-container>
+    <!-- 头部 -->
     <el-header>
       <Appheader />
     </el-header>
     <el-container>
+      <!-- 侧边栏 -->
       <el-aside width="200px">
         <el-menu
           router="router"
@@ -17,6 +19,7 @@
           <Navbar :navMenus="leftMenus"></Navbar>
         </el-menu>
       </el-aside>
+      <!-- 主体 -->
       <el-main>
         <div class="welcom" v-if="$route.path === '/' || $route.path === '/layout'">
           欢迎来到<span class="testfont">后台管理系统</span>
