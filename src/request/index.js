@@ -19,8 +19,8 @@ request.interceptors.request.use(
 
 // 响应拦截器
 request.interceptors.response.use(
-    (res) => {
-    if(res.status === 200){
+  (res) => {
+    if(res.status==200){
       return res.data;
     }
   },

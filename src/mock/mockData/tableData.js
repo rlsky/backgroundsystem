@@ -2,7 +2,12 @@ import Mock from 'mockjs' // 引入mockjs
 
 const Random = Mock.Random // Mock.Random 是一个工具类，用于生成各种随机数据
 
-let data = [] // 用于接受生成数据的数组
+// let data = [] // 用于接受生成数据的数组
+let dataobj = {
+    status:Random.integer(200, 201),
+    data:[],
+    msg:'mock数据'
+}
 let size = [
         '300x250', '250x250', '240x400', '336x280',
         '180x150', '720x300', '468x60', '234x60',
@@ -27,7 +32,7 @@ for (let i = 0; i < 10; i++) { // 可自定义生成的个数
         'Url': Random.url(), // 生成web地址
         'Address': Random.province() // 生成地址
     }
-    data.push(template)
+    dataobj.data.push(template)
 }
 
-export default data;
+export default dataobj;

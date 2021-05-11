@@ -63,7 +63,8 @@ export default {
   methods: {
     async getData(){
       let result=await getDataFromApi()
-      this.tableData=result
+      console.log('-----> 模拟借口：getDataFromApi <------',result)
+      this.tableData=result.data
     },
     handleClick(row) {
       window.open(row.Url);
