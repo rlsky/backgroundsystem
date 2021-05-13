@@ -24,6 +24,7 @@ module.exports = {
   lintOnSave:false,
   devServer:{
     port: 3050,
+    disableHostCheck:true,
     proxy: {
       '/bs': {
         target: 'http://api.k780.com/',

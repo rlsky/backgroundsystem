@@ -8,3 +8,12 @@ export function getWeather (data) {
     params: data
   })
 }
+
+
+export function getlunbo (data) {
+  return request({
+    url: 'http://123.207.32.32:8000/home/multidata',
+    method: 'get',
+    params: data
+  })
+}
