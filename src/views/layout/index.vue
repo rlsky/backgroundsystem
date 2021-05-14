@@ -20,11 +20,13 @@
         </el-menu>
       </el-aside>
       <!-- 主体 -->
-      <el-main>
+      <el-main class="main">
         <div class="welcom" v-if="$route.path === '/' || $route.path === '/layout'">
           欢迎来到<span class="testfont">后台管理系统</span>
         </div>
-        <router-view v-else></router-view>
+        <div class="content" v-else>
+          <router-view></router-view>
+        </div>
       </el-main>
     </el-container>
   </el-container>
@@ -34,7 +36,7 @@
 import { getWeather } from '@/api/index'
 import Navbar from '@/components/navbar'
 import Appheader from '@/components/appheader'
-import tablist from './tablist.json'
+import tablist from '@/utils/tablist.json'
 export default {
   name:'layout',
   components:{
@@ -76,6 +78,14 @@ export default {
   }
   .el-menu {
     height: 100%;
+  }
+  .main{
+    background:#E9ECF3;
+  }
+  .content{
+    background: white;
+    height: 100%;
+    border-radius: 10px;
   }
   .welcom{
     font-size: 28px;

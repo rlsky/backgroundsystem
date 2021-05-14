@@ -2,16 +2,16 @@
 export default [
   {
     path: '/layout',
+    name:'layout',
+    meta: { title: '首页' },
     component: () => import(/* webpackChunkName: "layout" */ '@/views/layout'),
     children:[
       {
+        name:'home',
         path:'/layout/home',
-        component:() => import(/* webpackChunkName: "layout" */ '@/views/home')
-      },
-      {
-        path:'/layout/Information',
-        component:() => import(/* webpackChunkName: "layout" */ '@/views/Information')
-      },
+        component:() => import(/* webpackChunkName: "layout" */ '@/pages/home'),
+        meta: { title: '主页' }
+      }
     ]
   }
 ]

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import layout from './layout'
+import examples from './examples'
 Vue.use(VueRouter);
 
 
@@ -17,7 +18,8 @@ const router = new VueRouter({
         path: '/',
         redirect: '/layout'
       },
-      ...layout
+      ...layout,
+      ...examples
     ]
 });
 
