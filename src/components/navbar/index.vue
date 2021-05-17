@@ -1,15 +1,15 @@
 <template>
   <fragment>
-    <div v-for="(navMenu,index) in navMenus" :key="index">
-      <template >
-        <el-menu-item v-if="navMenu.childs==null&&navMenu.entity&&navMenu.entity.state==='ENABLE'"
-          :key="navMenu.entity.id" :data="navMenu" :index="navMenu.entity.name" @click="toPath(navMenu.entity.value)" :route="navMenu.entity.value">
+      <template v-for="(navMenu,index) in navMenus">
+        <el-menu-item v-if="!navMenu.childs"
+          :key="index"
+          :index="navMenu.entity.path">
           <i :class="navMenu.entity.icon"></i>
           <span slot="title">{{navMenu.entity.alias}}</span>
         </el-menu-item>
-
-        <el-submenu v-if="navMenu.childs&&navMenu.entity&&navMenu.entity.state==='ENABLE'"
-          :key="navMenu.entity.id" :data="navMenu" :index="navMenu.entity.name" @click="toPath(navMenu.entity.value)" :route="navMenu.entity.value">
+        <el-submenu v-else
+          :key="index"
+          :index="navMenu.entity.path">
           <template slot="title">
             <i :class="navMenu.entity.icon"></i>
             <span> {{navMenu.entity.alias}}</span>
@@ -17,7 +17,6 @@
           <Navbar :navMenus="navMenu.childs"></Navbar>
         </el-submenu>
       </template>
-    </div>
   </fragment>
 </template>
 
@@ -25,17 +24,7 @@
   export default {
     name: 'Navbar',
     props: ['navMenus'],
-    data() {
-      return {}
-    },
-    created(){
-      console.log()
-    },
-    methods: {
-      toPath(url){
-        console.log(url)
-      }
-    }
+
   }
 </script>
 <style lang='scss' scoped>

@@ -7,24 +7,25 @@
     </el-header>
     <el-container>
       <!-- 侧边栏 -->
-      <el-aside width="200px">
-        <el-menu
-          router="router"
-          default-active="0"
-          class="el-menu-vertical-demo"
-          @select="menuSelected"
-          background-color="#F0F6F6"
-          text-color="#3C3F41"
-          active-text-color="black">
-          <Navbar :navMenus="leftMenus"></Navbar>
-        </el-menu>
+      <el-aside :width="isCollapsed? '64px' : '200px'">
+        <div class="asideSty" :style="{width:this.isCollapsed? '64px' : '200px' }">
+          <span @click="toqiehuan">折叠切换</span>
+          <el-menu
+            router
+            class="el-menu-vertical-demo"
+            background-color="#F0F6F6"
+            text-color="#3C3F41"
+            :default-active="$route.path"
+            active-text-color="#3497fb"
+            :unique-opened="true"
+            :collapse="isCollapsed">
+            <Navbar :navMenus="leftMenus"></Navbar>
+          </el-menu>
+        </div>
       </el-aside>
       <!-- 主体 -->
       <el-main class="main">
-        <div class="welcom" v-if="$route.path === '/' || $route.path === '/layout'">
-          欢迎来到<span class="testfont">后台管理系统</span>
-        </div>
-        <div class="content" v-else>
+        <div class="content">
           <router-view></router-view>
         </div>
       </el-main>
@@ -46,7 +47,8 @@ export default {
   data () {
     return {
       weatherCon:{},
-      leftMenus:{}
+      leftMenus:{},
+      isCollapsed: false
     }
   },
   created(){
@@ -54,8 +56,8 @@ export default {
     this.getWeather()
   },
   methods: {
-    menuSelected(e){
-      console.log(e)
+    toqiehuan(){
+      this.isCollapsed = ! this.isCollapsed
     },
     async getWeather(){
       let result=await getWeather({
@@ -73,31 +75,31 @@ export default {
 
 </script>
 <style lang='scss' scoped>
-  .el-container{
-    height: 100vh
+.el-aside{
+  transition: all 0.3s ease 0s;
+}
+.el-container{
+  height: 100vh
+}
+.main{
+  background:#E9ECF3;
+}
+.content{
+  background: white;
+  height: 100%;
+  border-radius: 10px;
+  min-width: 550px;
+}
+.asideSty{
+  height: 100%;
+  background-color: rgb(240, 246, 246);
+  transition: all 0.3s ease 0s;
+}
+.el-menu-vertical-demo{
+  border-right: none;
+  &:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
   }
-  .el-menu {
-    height: 100%;
-  }
-  .main{
-    background:#E9ECF3;
-  }
-  .content{
-    background: white;
-    height: 100%;
-    border-radius: 10px;
-    min-width: 550px;
-  }
-  .welcom{
-    font-size: 28px;
-    font-family: 'HYRunYuan-EEW';
-    font-weight: normal;
-    color: #97999B;
-    .testfont{
-      font-family: 'HYRunYuan-FEW';
-      font-size: 36px;
-      font-weight: normal;
-      color: #8B8075;
-    }
-  }
+}
 </style>

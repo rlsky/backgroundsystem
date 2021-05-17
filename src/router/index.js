@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import layout from './layout'
+// import layout from './layout'
 import examples from './examples'
+import login from './login'
 Vue.use(VueRouter);
 
 
@@ -15,11 +16,20 @@ const router = new VueRouter({
     mode: "history",
     routes: [
       {
-        path: '/',
-        redirect: '/layout'
+        path: '',
+        redirect: '/home',
+        component: () => import(/* webpackChunkName: "layout" */ '@/views/layout'),
+        children: [
+          {
+            name:'home',
+            path:'home',
+            component:() => import(/* webpackChunkName: "layout" */ '@/pages/home'),
+            meta: { title: '主页' }
+          }
+        ]
       },
-      ...layout,
-      ...examples
+      ...examples,
+      ...login
     ]
 });
 
