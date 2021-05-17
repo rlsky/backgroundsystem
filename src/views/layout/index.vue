@@ -58,6 +58,7 @@ export default {
     this.getWeather()
   },
   methods: {
+    // 验证用户是否登录，条件：1.vuex中存在token || sessionStorage中存在token
     checkAuth() {
       const sessionInfo = JSON.parse(sessionStorage.getItem('userinfo'))
       let token = this.$store.state.login.token || (sessionInfo && sessionInfo.login.token)
@@ -67,7 +68,13 @@ export default {
         this.getUser()
       }
     },
+    /* 获取用户信息 */
     getUser() {
+      /**
+       * 在这里请求用户信息
+       * 1.存入vuex中
+       * 2.在存入vuex的过程中同步存入了sessionStorage中
+       */
       let User = {
         id: '7f859967-9b12-441c-badc-8a7d312f6da4',
         username: 'admin',
@@ -79,6 +86,7 @@ export default {
       }
       this.$store.commit('login/SET_USER', User)
     },
+    /* navbar折叠切换 */
     toqiehuan(){
       this.isCollapsed = ! this.isCollapsed
     },
