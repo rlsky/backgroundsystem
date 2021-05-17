@@ -38,6 +38,7 @@ import { getWeather } from '@/api/index'
 import Navbar from '@/components/navbar'
 import Appheader from '@/components/appheader'
 import tablist from '@/utils/tablist.json'
+import { json } from 'body-parser';
 export default {
   name:'layout',
   components:{
@@ -52,10 +53,32 @@ export default {
     }
   },
   created(){
+    this.checkAuth()
     this.leftMenus=tablist.childs
     this.getWeather()
   },
   methods: {
+    checkAuth() {
+      const sessionInfo = JSON.parse(sessionStorage.getItem('userinfo'))
+      let token = this.$store.state.login.token || (sessionInfo && sessionInfo.login.token)
+      if (!token) {
+        this.$router.replace('login')
+      } else {
+        this.getUser()
+      }
+    },
+    getUser() {
+      let User = {
+        id: '7f859967-9b12-441c-badc-8a7d312f6da4',
+        username: 'admin',
+        name: 'luichooy',
+        type: {
+          code: 0,
+          name: '超级管理员'
+        }
+      }
+      this.$store.commit('login/SET_USER', User)
+    },
     toqiehuan(){
       this.isCollapsed = ! this.isCollapsed
     },

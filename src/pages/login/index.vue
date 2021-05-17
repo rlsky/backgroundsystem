@@ -7,6 +7,7 @@
       </div>
       <div class="login-form">
         <el-form ref="form" :model="form" :rules="rules">
+          <!-- 账号 -->
           <el-form-item prop="account">
             <el-input placeholder="请输入账号" v-model="form.account">
               <i
@@ -16,6 +17,7 @@
               </i>
             </el-input>
           </el-form-item>
+          <!-- 密码 -->
           <el-form-item prop="password">
             <el-input type="password" placeholder="请输入密码" v-model="form.password" show-password>
               <i
@@ -25,6 +27,7 @@
               </i>
             </el-input>
           </el-form-item>
+          <!-- 提交 -->
         <el-form-item>
           <el-row :gutter="20">
             <el-col :span="24" :offset="13">
@@ -65,8 +68,28 @@ export default {
   mounted(){},
 
   methods:{
+    /* 提交 */
+    submitForm(form){
+      this.$refs[form].validate(valid => {
+        if (valid) {
+          this.login()
+        }
+      })
+    },
+    /* 重置表单 */
     resetForm(form) {
       this.$refs[form].resetFields();
+    },
+    /* 登录 */
+    login(){
+      /*
+       *  在这边可以进行登陆请求
+       *  将请求返回的Token对象存到store中
+       *  @Token  token对象
+       */
+      let token = 'a94756da-2962-40ae-bdea-787fd02c9d92'
+      this.$store.commit('login/SET_TOKEN', token)
+      this.$router.replace('home')
     }
   }
 }

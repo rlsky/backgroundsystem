@@ -20,8 +20,8 @@
     },
     {
         "entity": {
-            "icon": "el-icon-message",
-            "alias": "系统管理",
+            "icon": "el-icon-s-order",
+            "alias": "模板",
             "path": "/oms",
 
             "id": 1,
@@ -35,7 +35,7 @@
         "childs": [
             {
                 "entity": {
-                    "icon": "el-icon-loading",
+                    "icon": "el-icon-document-copy",
                     "alias": "mock数据",
                     "path": "/oms/Information",
 
@@ -50,7 +50,7 @@
             },
             {
                 "entity": {
-                    "icon": "el-icon-bell",
+                    "icon": "el-icon-eleme",
                     "alias": "完整ele页面",
                     "path": "/oms/fullPage",
 

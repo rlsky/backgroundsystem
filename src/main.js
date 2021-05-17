@@ -2,6 +2,7 @@ import Vue from 'vue'
 import router from './router/index.js';
 import Fragment from 'vue-fragment'
 import App from './App.vue'
+import store from './store'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/swiper-bundle.min.css'
 import './assets/fonts/fonts.css'
@@ -174,6 +175,7 @@ Vue.config.productionTip = false
 require('./mock/mock')
 
 new Vue({
+  store,
   router,
   render: h => h(App),
 }).$mount('#app')
