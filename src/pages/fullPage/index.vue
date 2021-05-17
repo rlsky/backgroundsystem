@@ -20,15 +20,31 @@
     </div>
     <!-- 搜索区域 -->
     <div class="search">
-      <el-row :gutter="20">
-        <el-col :span="12"><div class="grid-content bg-purple"></div></el-col>
-        <el-col :span="12"><div class="grid-content bg-purple"></div></el-col>
-      </el-row>
-      <el-row :gutter="20">
-        <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-        <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-        <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-      </el-row>
+      <el-form ref="form" :model="form" label-width="80px">
+        <el-row :gutter="20">
+          <el-col :span="5">
+            <el-form-item label="活动名称:">
+              <el-input v-model="form.name" size="mini"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="活动名称:">
+              <el-input v-model="form.name" size="mini"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="活动名称:">
+              <el-input v-model="form.name" size="mini"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="活动名称:">
+              <el-input v-model="form.name" size="mini"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+      </el-form>
     </div>
 
   </div>
@@ -38,7 +54,17 @@
 export default {
   data () {
     return {
-      breadList: []
+      breadList: [],
+      form: {
+        name: '',
+        region: '',
+        date1: '',
+        date2: '',
+        delivery: false,
+        type: [],
+        resource: '',
+        desc: ''
+      }
     };
   },
   watch: {
@@ -77,6 +103,7 @@ export default {
 #fullPage{
   width:100%;
   height:100%;
+  min-width: 500px;
 }
 .el-page-header{
   background-color: rgb(240, 246, 246);

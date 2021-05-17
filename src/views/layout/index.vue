@@ -86,6 +86,7 @@ export default {
     background: white;
     height: 100%;
     border-radius: 10px;
+    min-width: 550px;
   }
   .welcom{
     font-size: 28px;
