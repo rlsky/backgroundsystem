@@ -3,7 +3,7 @@
   <div class="app-header">
     <a class="logo" @click="goHome">Lorena</a>
     <el-tooltip class="item" effect="dark" :content="$store.state.login.userinfo.type.name" placement="bottom">
-      <div class="user">
+      <div class="user" @click="goUser">
         <i class="usericon el-icon-user-solid" style="font-size:30px;color:white"></i>
         <span style="color:white">{{$store.state.login.userinfo.name}}</span>
       </div>
@@ -42,6 +42,9 @@ export default {
   mounted(){},
 
   methods: {
+    goUser(){
+      this.$router.push('/user/index')
+    },
     /* 跳转首页 */
     goHome(){
       this.$router.push('/home')

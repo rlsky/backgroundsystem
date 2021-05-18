@@ -24,13 +24,20 @@ module.exports = {
   lintOnSave:false,
   devServer:{
     port: 3050,
+    host: '0.0.0.0',
+    // 新版的webpack-dev-server出于安全考虑，默认检查hostname，如果hostname不是配置内的，将中断访问。
+    // nodejs项目在本地访问正常，然而部署到服务器上就提示Invalid Host header。
+    // 内网穿透也需要改为true
     disableHostCheck:true,
     proxy: {
+      // 只要是'/bs'开头的才用代理
       '/bs': {
+        // 代理到http://api.k780.com/
         target: 'http://api.k780.com/',
-        secure: false,
-        ws: true,
-        changeOrigin: true,
+        secure: false, // 如果是https接口，需要配置这个参数
+        ws: true, // 如果要代理 websockets，配置这个参数
+        changeOrigin: true, // 是否跨域
+        // 重写路径, 真正请求接口时需要正确地址http://api.k780.com/，所以要将/bs替换为''
         pathRewrite: {
           '^/bs': ''
         }

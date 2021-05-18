@@ -2,6 +2,7 @@ export default [
   {
     path: '/oms',
     meta: { title: '模板' },
+    redirect: '/oms/Information',
     component: () => import(/* webpackChunkName: "layout" */ '@/views/layout'),
     children:[
       {
