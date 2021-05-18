@@ -6,6 +6,9 @@
   - api ：请求接口配置
   - assets ： 静态资源（字体、样式）
   - components ： 公共组件
+    - appheader : 页面header
+    - crumbs ： 面包屑组件
+    - navbar ： 页面侧边栏
   - mock ： mock数据
   - pages ：页面
     - home ：首页
@@ -20,4 +23,4 @@
     - tablist.json ：导航栏数据结构
   - views ：
     - layout ： 页面整体布局
-  -store ：vuex模块化引入
+  -store ：vuex模块化
