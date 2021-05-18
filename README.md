@@ -15,7 +15,10 @@
     - Information ：mock示例页
     - fullPage ：element完整示例页面
     - login ：登录页面
-  - request ： axios封装
+    - user : 个人中心
+  - request ：
+    - index.js ：路由拦截
+    - baseurl.js : 根据环境切换请求api
   - router ：路由文件
   - styles ： 公共样式
     - init.css ： 样式初始化

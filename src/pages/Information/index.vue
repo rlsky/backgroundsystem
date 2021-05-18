@@ -1,3 +1,4 @@
+<!-- mock页 -->
 <template>
   <div class="info">
     <h1>Mock Demo.</h1>

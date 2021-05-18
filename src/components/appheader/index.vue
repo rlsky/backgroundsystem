@@ -1,4 +1,4 @@
-<!--  -->
+<!-- 头部header -->
 <template>
   <div class="app-header">
     <a class="logo" @click="goHome">Lorena</a>
