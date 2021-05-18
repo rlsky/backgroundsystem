@@ -3,7 +3,7 @@
   <div class="login">
     <div class="middle-wrapper">
       <div class="title-wrapper">
-        <div class="title">VUE-ADMIN 后台管理系统</div>
+        <div class="title">Lorena 后台管理系统</div>
       </div>
       <div class="login-form">
         <el-form ref="form" :model="form" :rules="rules">
@@ -102,7 +102,8 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: rgb(32, 160, 255);
+  // background-color: rgb(32, 160, 255);
+  background-image: url('../../img/yule/background.jpg');
 
   .middle-wrapper {
     position: fixed;
