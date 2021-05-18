@@ -89,7 +89,7 @@ export default {
       const sessionInfo = JSON.parse(sessionStorage.getItem('userinfo'))
       let token = this.$store.state.login.token || (sessionInfo && sessionInfo.login.token)
       if (!token) {
-        this.$router.replace('login')
+        this.$router.replace('/login')
       } else {
         this.getUser()
       }
@@ -155,7 +155,9 @@ export default {
 }
 .zhedie{
   font-size: 26px;
-
+  &:hover{
+    color: #3497fb
+  }
 }
 .content{
   background: white;

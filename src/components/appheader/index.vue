@@ -2,10 +2,10 @@
 <template>
   <div class="app-header">
     <a class="logo" @click="goHome">Lorena</a>
-    <el-tooltip class="item" effect="dark" :content="$store.state.login.userinfo.type.name" placement="bottom">
+    <el-tooltip class="item" effect="dark" :content="typename" placement="bottom">
       <div class="user" @click="goUser">
         <i class="usericon el-icon-user-solid" style="font-size:30px;color:white"></i>
-        <span style="color:white">{{$store.state.login.userinfo.name}}</span>
+        <span style="color:white">{{username}}</span>
       </div>
     </el-tooltip>
     <div class="weater" v-if="weathercon">
@@ -33,9 +33,15 @@ export default {
   },
   data () {
     return {
+      typename:'',
+      username:''
     };
   },
-
+  created(){
+    let userinfo = this.$store.state.login.userinfo
+    this.typename = userinfo && userinfo.type.name
+    this.username = userinfo && userinfo.name
+  },
   components: {},
 
   computed: {},
