@@ -38,9 +38,11 @@ export default {
     };
   },
   created(){
-    let userinfo = this.$store.state.login.userinfo
-    this.typename = userinfo && userinfo.type.name
-    this.username = userinfo && userinfo.name
+    const userinfo = this.$store.state.login.userinfo
+    if(userinfo){
+      this.typename = userinfo.type.name
+      this.username = userinfo.name
+    }
   },
   components: {},
 
