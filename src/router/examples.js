@@ -1,7 +1,7 @@
 export default [
   {
     path: '/oms',
-    meta: { title: '系统管理' },
+    meta: { title: '模板' },
     component: () => import(/* webpackChunkName: "layout" */ '@/views/layout'),
     children:[
       {

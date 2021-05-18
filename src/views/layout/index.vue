@@ -3,13 +3,15 @@
   <el-container>
     <!-- 头部 -->
     <el-header>
-      <Appheader />
+      <Appheader :weathercon="weathercon"/>
     </el-header>
     <el-container>
       <!-- 侧边栏 -->
       <el-aside :width="isCollapsed? '64px' : '200px'">
         <div class="asideSty" :style="{width:this.isCollapsed? '64px' : '200px' }">
-          <span @click="toqiehuan">折叠切换</span>
+          <div class="iconWrap" @click="toqiehuan">
+            <i class="zhedie" :class="[isCollapsed?'el-icon-s-unfold':'el-icon-s-fold']"></i>
+          </div>
           <el-menu
             router
             class="el-menu-vertical-demo"
@@ -26,6 +28,7 @@
       <!-- 主体 -->
       <el-main class="main">
         <div class="content">
+          <Crumbs v-if="$route.path != '/home'" :breadList="breadList"/>
           <router-view></router-view>
         </div>
       </el-main>
@@ -37,28 +40,50 @@
 import { getWeather } from '@/api/index'
 import Navbar from '@/components/navbar'
 import Appheader from '@/components/appheader'
+import Crumbs from '@/components/crumbs'
 import tablist from '@/utils/tablist.json'
 import { json } from 'body-parser';
 export default {
   name:'layout',
   components:{
     Navbar,
-    Appheader
+    Appheader,
+    Crumbs
   },
   data () {
     return {
-      weatherCon:{},
+      weathercon:{},
       leftMenus:{},
-      isCollapsed: false
+      isCollapsed: false,
+      breadList: []
+    }
+  },
+  watch: {
+    $route() {
+      this.getBreadcrumb();
     }
   },
   created(){
     this.checkAuth()
     this.leftMenus=tablist.childs
+    this.getBreadcrumb()
     this.getWeather()
   },
   methods: {
-    // 验证用户是否登录，条件：1.vuex中存在token || sessionStorage中存在token
+    getBreadcrumb() {
+      let matched = this.$route.matched;
+      //如果不是首页就拼接路由
+      if (!this.isHome(matched[0])) {
+        matched = [{ path: "/", meta: { title: "主页" } }].concat(matched);
+      }
+      this.breadList = matched;
+    },
+    isHome(route) {
+      return route.name === "home" || route.redirect === "/home";
+    },
+    /* 验证用户是否登录，条件：
+      vuex中存在token || sessionStorage中存在token
+    */
     checkAuth() {
       const sessionInfo = JSON.parse(sessionStorage.getItem('userinfo'))
       let token = this.$store.state.login.token || (sessionInfo && sessionInfo.login.token)
@@ -90,6 +115,7 @@ export default {
     toqiehuan(){
       this.isCollapsed = ! this.isCollapsed
     },
+    /* 天气接口 */
     async getWeather(){
       let result=await getWeather({
         app:'weather.today',
@@ -98,7 +124,8 @@ export default {
         sign:'b59bc3ef6191eb9f747dd4e83c99f2a4',
         format:'json'
       })
-      this.weatherCon = result.result;
+      this.weathercon = result.result;
+      console.log(this.weathercon)
     }
   },
   mounted(){}
@@ -109,19 +136,35 @@ export default {
 .el-aside{
   transition: all 0.3s ease 0s;
 }
+.el-header{
+  padding: 0px;
+}
 .el-container{
   height: 100vh
 }
 .main{
   background:#E9ECF3;
 }
+.iconWrap{
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 56px;
+  z-index: 9;
+}
+.zhedie{
+  font-size: 26px;
+
+}
 .content{
   background: white;
   height: 100%;
   border-radius: 10px;
   min-width: 550px;
+  padding: 20px;
 }
 .asideSty{
+  position: relative;
   height: 100%;
   background-color: rgb(240, 246, 246);
   transition: all 0.3s ease 0s;
