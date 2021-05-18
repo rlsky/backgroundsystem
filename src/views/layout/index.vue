@@ -28,6 +28,7 @@
       <!-- 主体 -->
       <el-main class="main">
         <div class="content">
+          <!-- 面包屑：首页不展示 -->
           <Crumbs v-if="$route.path != '/home'" :breadList="breadList"/>
           <router-view></router-view>
         </div>
@@ -70,6 +71,7 @@ export default {
     this.getWeather()
   },
   methods: {
+    /* 通过路由获取面包屑列表 */
     getBreadcrumb() {
       let matched = this.$route.matched;
       //如果不是首页就拼接路由
@@ -78,12 +80,11 @@ export default {
       }
       this.breadList = matched;
     },
+    /* 判断当前是否是首页 */
     isHome(route) {
       return route.name === "home" || route.redirect === "/home";
     },
-    /* 验证用户是否登录，条件：
-      vuex中存在token || sessionStorage中存在token
-    */
+    /* 验证用户是否登录，条件：vuex中存在token || sessionStorage中存在token */
     checkAuth() {
       const sessionInfo = JSON.parse(sessionStorage.getItem('userinfo'))
       let token = this.$store.state.login.token || (sessionInfo && sessionInfo.login.token)
