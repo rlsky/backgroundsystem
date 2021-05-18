@@ -1,9 +1,8 @@
 import axios from 'axios'
-
-const development = process.env.NODE_ENV == 'development'
+import urlParams from './baseurl'
 
 let request = axios.create({
-  baseURL: development ? '/bs' : '',
+  baseURL: urlParams.baseUrl,
   timeout: 30000      //超时时间
 });
 
