@@ -9,7 +9,7 @@
         <el-form ref="form" :model="form" :rules="rules">
           <!-- 账号 -->
           <el-form-item prop="account">
-            <el-input placeholder="请输入账号" v-model="form.account">
+            <el-input placeholder="请输入账号（随意输）" v-model="form.account">
               <i
                 class="el-icon-user-solid el-input__icon"
                 slot="prefix"
@@ -19,7 +19,7 @@
           </el-form-item>
           <!-- 密码 -->
           <el-form-item prop="password">
-            <el-input type="password" placeholder="请输入密码" v-model="form.password" show-password>
+            <el-input type="password" placeholder="请输入密码（随意输）" v-model="form.password" show-password>
               <i
                 class="el-icon-key el-input__icon"
                 slot="prefix"
@@ -60,13 +60,6 @@ export default {
       }
     };
   },
-
-  components: {},
-
-  computed: {},
-
-  mounted(){},
-
   methods:{
     /* 提交 */
     submitForm(form){
@@ -102,7 +95,6 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
-  // background-color: rgb(32, 160, 255);
   background-image: url('../../img/yule/background.jpg');
 
   .middle-wrapper {

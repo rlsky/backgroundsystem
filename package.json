@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve --mode dev --open",
     "test:build": "vue-cli-service build --mode test",
-    "build": "vue-cli-service build --mode prod"
+    "build": "vue-cli-service build --mode prod",
+    "nd": "node server/index.js"
   },
   "dependencies": {
     "@better-scroll/core": "^2.3.1",
@@ -28,6 +29,8 @@
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-plugin-component": "^1.1.1",
+    "koa": "^2.13.1",
+    "koa-router": "^10.0.0",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
   }

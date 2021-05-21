@@ -6,8 +6,8 @@ import store from './store'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/swiper-bundle.min.css'
 import './assets/fonts/fonts.css'
-import Swiper2, { Navigation, EffectFade, Autoplay } from 'swiper' // 如果不行加上这个 Pagination
-Swiper2.use([Navigation, EffectFade, Autoplay]) // 如果不行加上这个 Pagination
+import Swiper2, { Navigation, EffectFade, Autoplay } from 'swiper' // 如不行加上这个 Pagination
+Swiper2.use([Navigation, EffectFade, Autoplay])
 import {
   Pagination,
   Dialog,

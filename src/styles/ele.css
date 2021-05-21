@@ -1,0 +1,6 @@
+.el-cascader-menu{
+  height: 200px;
+}
+.el-cascader-menu,.el-scrollbar__wrap{
+  overflow-x: hidden;
+}

@@ -5,16 +5,7 @@
         "entity": {
             "icon": "el-icon-s-home",
             "alias": "主页",
-            "path": "/home",
-
-            "id": 1,
-            "parentMenuId": 0,
-            "name": "systemManage",
-            "state": "ENABLE",
-            "sort": 0,
-            "type": "NONE",
-            "discription": "用于系统管理的菜单",
-            "createUserId": 1
+            "path": "/home"
         },
         "childs": null
     },
@@ -22,29 +13,14 @@
         "entity": {
             "icon": "el-icon-s-order",
             "alias": "模板",
-            "path": "/oms",
-
-            "id": 1,
-            "parentMenuId": 0,
-            "name": "systemManage",
-            "state": "ENABLE",
-            "type": "NONE",
-            "discription": "用于系统管理的菜单",
-            "createUserId": 1
+            "path": "/oms"
         },
         "childs": [
             {
                 "entity": {
                     "icon": "el-icon-document-copy",
                     "alias": "mock数据",
-                    "path": "/oms/Information",
-
-                    "id": 3,
-                    "parentMenuId": 1,
-                    "name": "authManage",
-                    "type": "LINK",
-                    "discription": "用于权限管理的菜单",
-                    "createUserId": 1
+                    "path": "/oms/Information"
                 },
                 "childs": null
             },
@@ -52,16 +28,7 @@
                 "entity": {
                     "icon": "el-icon-eleme",
                     "alias": "完整ele页面",
-                    "path": "/oms/fullPage",
-
-                    "state": "ENABLE",
-                    "sort": 1,
-                    "id": 4,
-                    "parentMenuId": 1,
-                    "name": "roleManage",
-                    "type": "LINK",
-                    "discription": "用于角色管理的菜单",
-                    "createUserId": 1
+                    "path": "/oms/fullPage"
                 },
                 "childs": null
             }

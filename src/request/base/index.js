@@ -1,14 +1,13 @@
-// 远程接口使用request
+// 本地服务接口使用http
 import axios from 'axios'
-import urlParams from './baseurl'
 
-let request = axios.create({
-  baseURL: urlParams.baseUrl,
+let http = axios.create({
+  baseURL: 'http://localhost:3000',
   timeout: 30000      //超时时间
 });
 
 // 请求拦截器
-request.interceptors.request.use(
+http.interceptors.request.use(
   function (config) {
     return config;
   },
@@ -18,8 +17,9 @@ request.interceptors.request.use(
 );
 
 // 响应拦截器
-request.interceptors.response.use(
+http.interceptors.response.use(
   (res) => {
+    console.log(res)
     if(res.status==200){
       return res.data;
     }
@@ -31,4 +31,4 @@ request.interceptors.response.use(
 
 
 
-export default request
+export default http

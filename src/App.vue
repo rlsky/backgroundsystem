@@ -14,4 +14,5 @@ export default {
 
 <style lang="scss">
 @import "styles/init.css";
+@import "styles/ele.css";
 </style>

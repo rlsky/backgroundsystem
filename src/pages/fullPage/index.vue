@@ -1,8 +1,5 @@
 <!-- ele页面 -->
 <template>
-  <!-- Layout 布局 , Button 按钮 , Input 输入框 , Select 选择器 , Cascader 级联选择器 , TimePicker 时间选择器,  DatePicker 日期选择器 , DateTimePicker 日期时间选择器
-  Table 表格 , Pagination 分页 , Loading 加载 , Message 消息提示 , MessageBox 弹框 , Notification 通知 , Breadcrumb 面包屑 , Dropdown 下拉菜单
-  Dialog 对话框 , Tooltip 文字提示 , Popover 弹出框 -->
   <div id="fullPage">
     <!-- 搜索区域 -->
     <div class="search">
@@ -14,18 +11,15 @@
             </el-form-item>
           </el-col>
           <el-col :span="5">
-            <el-form-item label="活动名称:">
-              <el-input v-model="form.name" size="mini"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="5">
-            <el-form-item label="活动名称:">
-              <el-input v-model="form.name" size="mini"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="5">
-            <el-form-item label="活动名称:">
-              <el-input v-model="form.name" size="mini"></el-input>
+            <el-form-item label="选择城市:">
+              <el-cascader
+                size="mini"
+                filterable
+                clearable
+                v-model="form.city"
+                :options="options"
+                @change="handleChange">
+              </el-cascader>
             </el-form-item>
           </el-col>
         </el-row>
@@ -37,32 +31,40 @@
 </template>
 
 <script>
+import { getTableData , getAddress} from '@/api/fullPage'
 export default {
   data () {
     return {
       form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
-      }
+        name: '', // 活动名称
+        city:[], // 选中的省市县id组成的数组
+      },
+      options: [], // 城市列表
     };
   },
-  watch: {
-  },
   created(){
+    this.getTableData()
+    this.getAddress()
   },
-  components: {},
-
-  computed: {},
-
-  mounted(){},
-
   methods: {
+    /* 获取table列表 */
+    async getTableData(){
+      let result=await getTableData({
+        per_page:10,
+        cur_page:1
+      })
+      console.log('-----> 本地服务接口：getTableData <------',result)
+    },
+    /* 获取城市列表 */
+    async getAddress(){
+      let result=await getAddress()
+      this.options=result.data
+      console.log('-----> 本地服务接口：getAddress <------',result)
+    },
+    /* 选择城市发生改变 */
+    handleChange(value) {
+      console.log('城市发生改变')
+    }
   }
 }
 
@@ -81,5 +83,4 @@ export default {
   border-radius: 11px;
   margin: 0 auto;
 }
-
 </style>

@@ -64,7 +64,7 @@ export default {
   methods: {
     async getData(){
       let result=await getDataFromApi()
-      console.log('-----> 模拟借口：getDataFromApi <------',result)
+      console.log('-----> mock接口：getDataFromApi <------',result)
       this.tableData=result.data
     },
     handleClick(row) {
