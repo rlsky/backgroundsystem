@@ -16,7 +16,13 @@ export default [
         path:'/oms/fullPage',
         component:() => import(/* webpackChunkName: "layout" */ '@/pages/fullPage'),
         meta: { title: '完整ele页面' }
-      }
+      },
+      {
+        name:'upload',
+        path:'/oms/upload',
+        component:() => import(/* webpackChunkName: "layout" */ '@/pages/upload'),
+        meta: { title: '上传' }
+      },
     ]
   }
 ]

@@ -31,6 +31,14 @@
                     "path": "/oms/fullPage"
                 },
                 "childs": null
+            },
+            {
+                "entity": {
+                    "icon": "el-icon-upload2",
+                    "alias": "上传",
+                    "path": "/oms/upload"
+                },
+                "childs": null
             }
         ]
     }
