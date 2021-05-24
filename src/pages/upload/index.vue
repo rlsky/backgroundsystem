@@ -7,7 +7,6 @@
         action="http://localhost:3000/api/upload"
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
-        :on-remove="handleRemove"
         :before-upload="beforeAvatarUpload">
         <img v-if="imageUrl" :src="imageUrl" class="avatar">
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>

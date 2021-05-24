@@ -161,7 +161,7 @@ export default {
 }
 .content{
   background: white;
-  height: 100%;
+  // height: 100%;
   border-radius: 10px;
   min-width: 550px;
   padding: 20px;
