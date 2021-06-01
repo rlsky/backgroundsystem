@@ -39,6 +39,14 @@
                     "path": "/oms/upload"
                 },
                 "childs": null
+            },
+            {
+                "entity": {
+                    "icon": "el-icon-upload2",
+                    "alias": "全景看图",
+                    "path": "/oms/panorama"
+                },
+                "childs": null
             }
         ]
     }

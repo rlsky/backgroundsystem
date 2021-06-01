@@ -23,6 +23,12 @@ export default [
         component:() => import(/* webpackChunkName: "layout" */ '@/pages/upload'),
         meta: { title: '上传' }
       },
+      {
+        name:'panorama',
+        path:'/oms/panorama',
+        component:() => import(/* webpackChunkName: "layout" */ '@/pages/panorama'),
+        meta: { title: '全景看图' }
+      },
     ]
   }
 ]
