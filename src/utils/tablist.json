@@ -42,9 +42,17 @@
             },
             {
                 "entity": {
-                    "icon": "el-icon-upload2",
+                    "icon": "el-icon-view",
                     "alias": "全景看图",
                     "path": "/oms/panorama"
+                },
+                "childs": null
+            },
+            {
+                "entity": {
+                    "icon": "el-icon-receiving",
+                    "alias": "lodash模块",
+                    "path": "/oms/lodashPage"
                 },
                 "childs": null
             }

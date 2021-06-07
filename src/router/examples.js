@@ -29,6 +29,12 @@ export default [
         component:() => import(/* webpackChunkName: "layout" */ '@/pages/panorama'),
         meta: { title: '全景看图' }
       },
+      {
+        name:'lodashPage',
+        path:'/oms/lodashPage',
+        component:() => import(/* webpackChunkName: "layout" */ '@/pages/lodashPage'),
+        meta: { title: 'lodash模块' }
+      },
     ]
   }
 ]
