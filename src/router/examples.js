@@ -35,6 +35,12 @@ export default [
         component:() => import(/* webpackChunkName: "layout" */ '@/pages/lodashPage'),
         meta: { title: 'lodash模块' }
       },
+      {
+        name:'customColumns',
+        path:'/oms/customColumns',
+        component:() => import(/* webpackChunkName: "layout" */ '@/pages/customColumns'),
+        meta: { title: '自定义列' }
+      },
     ]
   }
 ]

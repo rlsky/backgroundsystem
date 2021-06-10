@@ -55,6 +55,14 @@
                     "path": "/oms/lodashPage"
                 },
                 "childs": null
+            },
+            {
+                "entity": {
+                    "icon": "el-icon-receiving",
+                    "alias": "customColumns",
+                    "path": "/oms/customColumns"
+                },
+                "childs": null
             }
         ]
     }
