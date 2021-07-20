@@ -1,27 +1,100 @@
 <!-- lodash页面 -->
 <template>
   <div>
-    lodash页面
+    <div id="container" class="map" tabindex="0"></div>
+    <div id="pickerBox">
+      <input id="pickerInput" placeholder="输入关键字选取地点" />
+      <div id="poiInfo"></div>
+    </div>
   </div>
 </template>
 
 <script>
-import _ from 'lodash'
+import loadMap from "./loadMap.js";
+import { Promise } from 'q';
 export default {
-  data () {
-    return {
-    };
+  data() {
+    return {};
   },
 
   components: {},
 
   computed: {},
 
-  mounted(){},
+  mounted() {
+    this.initMap();
+  },
 
-  methods: {}
+  methods: {
+    /**
+     * 初始化高德地图
+     */
+    initMap() {
+      let that = this;
+      // 传入key，plugins，版本号
+      loadMap(that.key, that.plugins, that.v)
+        .then(AMap => {
+          //地图加载
+          let Atestmap = new AMap.Map("container", {
+             zoom: 10
+          });
+          // 将map存入window对象中，供https://cache.amap.com/lbs/static/addToolbar.js中的方法使用
+          window.Atestmap = Atestmap;
+          //输入提示
+          AMapUI.loadUI(['misc/PoiPicker'], function(PoiPicker) {
+
+              var poiPicker = new PoiPicker({
+                  //city:'北京',
+                  input: 'pickerInput'
+              });
+
+              //初始化poiPicker
+              poiPickerReady(poiPicker);
+          });
+        })
+        .catch(err => {
+          console.log(err, "地图加载失败！");
+        });
+    },
+  },
+};
+</script>
+<style lang="scss" scoped>
+#container {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  font-size: 13px;
 }
 
-</script>
-<style lang='scss' scoped>
+#pickerBox {
+  position: absolute;
+  z-index: 9999;
+  top: 50px;
+  right: 30px;
+  width: 300px;
+}
+
+#pickerInput {
+  width: 200px;
+  padding: 5px 5px;
+}
+
+#poiInfo {
+  background: #fff;
+}
+
+.amap_lib_placeSearch .poibox.highlight {
+  background-color: #cae1ff;
+}
+
+.amap_lib_placeSearch .poi-more {
+  display: none !important;
+}
+/deep/ #pickerInput{
+  color: #cae1ff;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
 </style>
