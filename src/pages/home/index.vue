@@ -7,17 +7,17 @@
 
 <script>
 export default {
-  name:'home',
-  data () {
-    return {
-    };
-  },
+  name: 'Home',
 
   components: {},
+  data() {
+    return {
+    }
+  },
 
   computed: {},
 
-  mounted(){},
+  mounted() {},
 
   methods: {}
 }

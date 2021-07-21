@@ -7,19 +7,18 @@
         <el-row :gutter="20">
           <el-col :span="5">
             <el-form-item label="活动名称:">
-              <el-input v-model="form.name" size="mini"></el-input>
+              <el-input v-model="form.name" size="mini"/>
             </el-form-item>
           </el-col>
           <el-col :span="5">
             <el-form-item label="选择城市:">
               <el-cascader
+                v-model="form.city"
+                :options="cityoptions"
                 size="mini"
                 filterable
                 clearable
-                v-model="form.city"
-                :options="cityoptions"
-                @change="handleChange">
-              </el-cascader>
+                @change="handleChange"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -39,18 +38,17 @@
       @handleIndexChange="handleIndexChange"
       @handleSelectionChange="handleSelectionChange"
       @handleFilter="handleFilter"
-      @handelAction="handelAction">
-    </Table>
+      @handelAction="handelAction"/>
 
   </div>
 </template>
 
 <script>
-import { getTableData , getAddress} from '@/api/fullPage'
+import { getTableData, getAddress } from '@/api/fullPage'
 import Table from '@/components/table'
 export default {
-  name:'ele',
-  components:{
+  name: 'Ele',
+  components: {
     Table,
     expandDom: {
       props: {
@@ -61,16 +59,16 @@ export default {
           required: true
         }
       },
-      render (h) {
+      render(h) {
         return h('div', {}, ([this.column.render(this.row, this.column)]))
       }
     }
   },
-  data () {
+  data() {
     return {
       form: {
         name: '', // 活动名称
-        city:[], // 选中的省市县id组成的数组
+        city: [] // 选中的省市县id组成的数组
       },
       cityoptions: [], // 城市列表
       total: 0,
@@ -99,7 +97,7 @@ export default {
           width: '160',
           render: (h, params) => {
             return h('el-tag', {
-              props: {type: params.row.state === 0 ? 'success' : params.row.state === 1 ? 'info' : 'danger'} // 组件的props
+              props: { type: params.row.state === 0 ? 'success' : params.row.state === 1 ? 'info' : 'danger' } // 组件的props
             }, params.row.state === 0 ? '上架' : params.row.state === 1 ? '下架' : '审核中')
           }
         },
@@ -140,69 +138,69 @@ export default {
         loading: false, // 是否添加表格loading加载动画
         highlightCurrentRow: true, // 是否支持当前行高亮显示
         mutiSelect: true // 是否支持列表项选中功能
-      }, // table 的参数
+      } // table 的参数
     }
   },
-  created(){
+  created() {
     this.getTableData()
     this.getAddress()
   },
   methods: {
     /* 获取table列表 */
-    async getTableData(){
-      this.options.loading=true
-      let result=await getTableData({
-        per_page:this.pagination.pageSize,
-        cur_page:this.pagination.pageIndex
+    async getTableData() {
+      this.options.loading = true
+      const result = await getTableData({
+        per_page: this.pagination.pageSize,
+        cur_page: this.pagination.pageIndex
       })
       setTimeout(() => {
-        this.list=result.data.table
-        this.total=result.data.total
-        this.options.loading=false
-      }, 300);
+        this.list = result.data.table
+        this.total = result.data.total
+        this.options.loading = false
+      }, 300)
 
-      console.log('-----> 本地服务接口：getTableData <------',result)
+      console.log('-----> 本地服务接口：getTableData <------', result)
     },
     /* 获取城市列表 */
-    async getAddress(){
-      let result=await getAddress()
-      this.cityoptions=result.data
-      console.log('-----> 本地服务接口：getAddress <------',result)
+    async getAddress() {
+      const result = await getAddress()
+      this.cityoptions = result.data
+      console.log('-----> 本地服务接口：getAddress <------', result)
     },
     /* 选择城市发生改变 */
     handleChange(value) {
       console.log('城市发生改变')
     },
     // 切换每页显示的数量
-    handleSizeChange (pagination) {
-      console.log(pagination,'pagination')
+    handleSizeChange(pagination) {
+      console.log(pagination, 'pagination')
       this.pagination = pagination
       this.getTableData()
     },
     // 切换页码
-    handleIndexChange (pagination) {
+    handleIndexChange(pagination) {
       console.log(pagination)
       this.pagination = pagination
       this.getTableData()
     },
     // 选中行
-    handleSelectionChange (val) {
+    handleSelectionChange(val) {
       console.log('val:', val)
     },
     // 编辑
-    handleEdit (index, row) {
+    handleEdit(index, row) {
       console.log(' index:', index)
       console.log(' row:', row)
     },
     // 删除
-    handleDel (index, row) {
+    handleDel(index, row) {
       console.log(' index:', index)
       console.log(' row:', row)
     },
-    handleFilter(){
+    handleFilter() {
       console.log('handleFilter')
     },
-    handelAction(){
+    handelAction() {
       console.log('handelAction')
     }
   }

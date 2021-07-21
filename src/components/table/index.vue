@@ -2,20 +2,20 @@
 <template>
   <div class="table">
 
-     <!--region 表格-->
+    <!--region 表格-->
     <el-table
-      id="iTable"
-      :data="list"
       v-loading.iTable="options.loading"
-      :max-height="height"
+      id="iTable"
       ref="mutipleTable"
+      :data="list"
+      :max-height="height"
       @selection-change="handleSelectionChange">
       <!--region 选择框-->
-      <el-table-column v-if="options.mutiSelect" type="selection" style="width: 55px;">
-      </el-table-column>
+      <el-table-column v-if="options.mutiSelect" type="selection" style="width: 55px;"/>
       <!--region 数据列-->
       <template v-for="(column, index) in columns">
         <el-table-column
+          :key="index"
           :prop="column.prop"
           :label="column.label"
           :align="column.align"
@@ -23,14 +23,14 @@
           <template slot-scope="scope">
             <template v-if="!column.render">
               <template v-if="column.formatter">
-                <span v-html="column.formatter(scope.row, column)"></span>
+                <span v-html="column.formatter(scope.row, column)"/>
               </template>
               <template v-else>
-                <span>{{scope.row[column.prop]}}</span>
+                <span>{{ scope.row[column.prop] }}</span>
               </template>
             </template>
             <template v-else>
-              <expand-dom :column="column" :row="scope.row" :render="column.render" :index="index"></expand-dom>
+              <expand-dom :column="column" :row="scope.row" :render="column.render" :index="index"/>
             </template>
           </template>
         </el-table-column>
@@ -39,39 +39,62 @@
       <!-- <el-table-column>
       </el-table-column> -->
     </el-table>
-    <div style="height:12px"></div>
-     <!--region 分页-->
-    <el-pagination v-if="pagination" @size-change="handleSizeChange"
-      @current-change="handleIndexChange"
+    <div style="height:12px"/>
+    <!--region 分页-->
+    <el-pagination
+      v-if="pagination"
       :page-size="tableCurrentPagination.pageSize"
       :page-sizes="[10,20,50]"
       :current-page="tableCurrentPagination.pageIndex"
+      :total="total"
       layout="total,sizes, prev, pager, next,jumper"
-      :total="total"></el-pagination>
-     <!--endregion-->
+      @size-change="handleSizeChange"
+      @current-change="handleIndexChange"/>
+      <!--endregion-->
 
   </div>
 </template>
 
 <script>
 export default {
-  namre:'table',
+  namre: 'table',
 
-  data () {
-    return {
-        pageIndex: 1,
-        tableCurrentPagination: {},
-        multipleSelection: [] // 多行选中
-    };
+  components: {
+    expandDom: {
+      functional: true,
+      props: {
+        row: Object,
+        render: Function,
+        index: Number,
+        column: {
+          type: Object,
+          default: null
+        }
+      },
+      render: (h, ctx) => {
+        const params = {
+          row: ctx.props.row,
+          index: ctx.props.index
+        }
+        if (ctx.props.column) params.column = ctx.props.column
+        return ctx.props.render(h, params)
+      }
+    }
   },
   props: {
     list: {
       type: Array,
-      default: [] // prop:表头绑定的地段，label：表头名称，align：每列数据展示形式（left, center, right），width:列宽
+      default() {
+        return []
+      }
+      // prop:表头绑定的地段，label：表头名称，align：每列数据展示形式（left, center, right），width:列宽
     }, // 数据列表
     columns: {
       type: Array,
-      default: [] // 需要展示的列 === prop：列数据对应的属性，label：列名，align：对齐方式，width：列宽
+      default() {
+        return []
+      }
+      // 需要展示的列 === prop：列数据对应的属性，label：列名，align：对齐方式，width：列宽
     },
     total: {
       type: Number,
@@ -87,144 +110,131 @@ export default {
     }, // 计算表格的高度
     options: {
       type: Object,
-      default: {
-        stripe: false, // 是否为斑马纹 table
-        loading: false, // 是否添加表格loading加载动画
-        highlightCurrentRow: false, // 是否支持当前行高亮显示
-        mutiSelect: false // 是否支持列表项选中功能
+      default() {
+        return {
+          stripe: false, // 是否为斑马纹 table
+          loading: false, // 是否添加表格loading加载动画
+          highlightCurrentRow: false, // 是否支持当前行高亮显示
+          mutiSelect: false // 是否支持列表项选中功能
+        }
       }
     } // table 表格的控制参数
   },
 
-  components: {
-      expandDom: {
-        functional: true,
-        props: {
-          row: Object,
-          render: Function,
-          index: Number,
-          column: {
-            type: Object,
-            default: null
-          }
-        },
-        render: (h, ctx) => {
-          const params = {
-            row: ctx.props.row,
-            index: ctx.props.index
-          }
-          if (ctx.props.column) params.column = ctx.props.column
-          return ctx.props.render(h, params)
-        }
-      }
+  data() {
+    return {
+      pageIndex: 1,
+      tableCurrentPagination: {},
+      multipleSelection: [] // 多行选中
+    }
   },
 
   computed: {
-      // 计算table高度
-      height () {
-        return '500'
-      }
+    // 计算table高度
+    height() {
+      return '500'
+    }
   },
 
-  mounted(){
-      this.tableCurrentPagination = this.pagination || {
-        pageSize: this.total,
-        pageIndex: 1
-      } // 判断是否需要分页
+  mounted() {
+    this.tableCurrentPagination = this.pagination || {
+      pageSize: this.total,
+      pageIndex: 1
+    } // 判断是否需要分页
   },
 
   methods: {
-     // 切换每页显示的数量
-      handleSizeChange (size) {
-        if (this.pagination) {
-          this.tableCurrentPagination = {
-            pageIndex: 1,
-            pageSize: size
-          }
-          this.$emit('handleSizeChange', this.tableCurrentPagination)
+    // 切换每页显示的数量
+    handleSizeChange(size) {
+      if (this.pagination) {
+        this.tableCurrentPagination = {
+          pageIndex: 1,
+          pageSize: size
         }
-      },
-      // 切换页码
-      handleIndexChange (currnet) {
-        if (this.pagination) {
-          this.tableCurrentPagination.pageIndex = currnet
-          this.$emit('handleIndexChange', this.tableCurrentPagination)
-        }
-      },
-      // 多行选中
-      handleSelectionChange (val) {
-        this.multipleSelection = val
-        this.$emit('handleSelectionChange', val)
-      },
-      // 显示 筛选弹窗
-      showfilterDataDialog () {
-        this.$emit('handleFilter')
-      },
-      // 显示 表格操作弹窗
-      showActionTableDialog () {
-        this.$emit('handelAction')
+        this.$emit('handleSizeChange', this.tableCurrentPagination)
       }
+    },
+    // 切换页码
+    handleIndexChange(currnet) {
+      if (this.pagination) {
+        this.tableCurrentPagination.pageIndex = currnet
+        this.$emit('handleIndexChange', this.tableCurrentPagination)
+      }
+    },
+    // 多行选中
+    handleSelectionChange(val) {
+      this.multipleSelection = val
+      this.$emit('handleSelectionChange', val)
+    },
+    // 显示 筛选弹窗
+    showfilterDataDialog() {
+      this.$emit('handleFilter')
+    },
+    // 显示 表格操作弹窗
+    showActionTableDialog() {
+      this.$emit('handelAction')
+    }
   }
 }
-
 </script>
 <style lang='scss' scoped>
-  .table {
-    height: 80%;
-    max-height: 80%;
-    .el-pagination {
-      margin: 10px;
-    }
-    .el-table__header-wrapper, .el-table__fixed-header-wrapper {
-      thead {
-        tr {
-          th {
-            color: #333333;
-          }
+.table {
+  height: 80%;
+  max-height: 80%;
+  .el-pagination {
+    margin: 10px;
+  }
+  .el-table__header-wrapper,
+  .el-table__fixed-header-wrapper {
+    thead {
+      tr {
+        th {
+          color: #333333;
         }
       }
     }
-    .el-table-column--selection .cell {
-      padding: 0;
-      text-align: center;
-    }
-    .el-table__fixed-right {
-      bottom: 0 !important;
-      right: 6px !important;
-      z-index: 1004;
-    }
-    .operate-group {
-      display: flex;
-      flex-wrap: wrap;
-      .item {
-        margin-top: 4px;
-        margin-bottom: 4px;
-        display: block;
-        flex: 0 0 50%;
-      }
-    }
-    .filter-data {
-      top: e("calc((100% - 100px) / 3)");
-      background-color: rgba(0, 0, 0, 0.7);
-    }
-    .table-action {
-      top: e("calc((100% - 100px) / 2)");
-      background-color: rgba(0, 0, 0, 0.7);
-    }
-    .fix-right {
-      position: absolute;
-      right: 0;
-      height: 100px;
-      color: #ffffff;
-      width: 30px;
+  }
+  .el-table-column--selection .cell {
+    padding: 0;
+    text-align: center;
+  }
+  .el-table__fixed-right {
+    bottom: 0 !important;
+    right: 6px !important;
+    z-index: 1004;
+  }
+  .operate-group {
+    display: flex;
+    flex-wrap: wrap;
+    .item {
+      margin-top: 4px;
+      margin-bottom: 4px;
       display: block;
-      z-index: 1005;
-      writing-mode: vertical-rl;
-      text-align: center;
-      line-height: 28px;
-      border-bottom-left-radius: 6px;
-      border-top-left-radius: 6px;
-      cursor: pointer;
+      flex: 0 0 50%;
     }
   }
+  .filter-data {
+    top: e("calc((100% - 100px) / 3)");
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  .table-action {
+    top: e("calc((100% - 100px) / 2)");
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  .fix-right {
+    position: absolute;
+    right: 0;
+    height: 100px;
+    color: #ffffff;
+    width: 30px;
+    display: block;
+    z-index: 1005;
+    writing-mode: vertical-rl;
+    text-align: center;
+    line-height: 28px;
+    border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
+    cursor: pointer;
+  }
+}
 </style>

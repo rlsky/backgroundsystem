@@ -1,28 +1,28 @@
+/* eslint-disable no-undef */
 <!-- lodash页面 -->
 <template>
   <div>
-    <div id="container" class="map" tabindex="0"></div>
+    <div id="container" class="map" tabindex="0"/>
     <div id="pickerBox">
-      <input id="pickerInput" placeholder="输入关键字选取地点" />
-      <div id="poiInfo"></div>
+      <input id="pickerInput" placeholder="输入关键字选取地点" >
+      <div id="poiInfo"/>
     </div>
   </div>
 </template>
 
 <script>
-import loadMap from "./loadMap.js";
-import { Promise } from 'q';
+import loadMap from './loadMap.js'
 export default {
-  data() {
-    return {};
-  },
 
   components: {},
+  data() {
+    return {}
+  },
 
   computed: {},
 
   mounted() {
-    this.initMap();
+    this.initMap()
   },
 
   methods: {
@@ -30,34 +30,34 @@ export default {
      * 初始化高德地图
      */
     initMap() {
-      let that = this;
+      const that = this
       // 传入key，plugins，版本号
       loadMap(that.key, that.plugins, that.v)
         .then(AMap => {
-          //地图加载
-          let Atestmap = new AMap.Map("container", {
-             zoom: 10
-          });
+          // 地图加载
+          const Atestmap = new AMap.Map('container', {
+            zoom: 10
+          })
           // 将map存入window对象中，供https://cache.amap.com/lbs/static/addToolbar.js中的方法使用
-          window.Atestmap = Atestmap;
-          //输入提示
+          window.Atestmap = Atestmap
+          // 输入提示
+          // eslint-disable-next-line no-undef
           AMapUI.loadUI(['misc/PoiPicker'], function(PoiPicker) {
-
-              var poiPicker = new PoiPicker({
-                  //city:'北京',
-                  input: 'pickerInput'
-              });
-
-              //初始化poiPicker
-              poiPickerReady(poiPicker);
-          });
+            var poiPicker = new PoiPicker({
+              // city:'北京',
+              input: 'pickerInput'
+            })
+            // 初始化poiPicker
+            // eslint-disable-next-line no-undef
+            poiPickerReady(poiPicker)
+          })
         })
         .catch(err => {
-          console.log(err, "地图加载失败！");
-        });
-    },
-  },
-};
+          console.log(err, '地图加载失败！')
+        })
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 #container {

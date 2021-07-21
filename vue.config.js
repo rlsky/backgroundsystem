@@ -21,7 +21,7 @@ module.exports = {
   // 是否使用hash命名文件，默认是true
   filenameHashing:true,
   // 是否在保存的时候使用 `eslint-loader` 进行检查, 默认false。
-  lintOnSave:false,
+  lintOnSave:true,
   devServer:{
     port: 3050,
     host: '0.0.0.0',

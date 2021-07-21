@@ -12,10 +12,10 @@
               :prop="col.prop"
               :label="col.label"
               :width="col.width"
-            ></el-table-column>
+            />
             <el-table-column fixed="right" label="操作" width="100">
               <template slot-scope="scope">
-                <el-button @click="handleClick(scope.row)" type="text" size="small">跳转</el-button>
+                <el-button type="text" size="small" @click="handleClick(scope.row)">跳转</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -29,49 +29,49 @@
 import { getDataFromApi } from '@/api/Information'
 const columns = [
   {
-    prop: "Date",
-    label: "日期",
+    prop: 'Date',
+    label: '日期',
     width: 180
   },
   {
-    prop: "Name",
-    label: "姓名",
+    prop: 'Name',
+    label: '姓名',
     width: 180
   },
   {
-    prop: "Address",
-    label: "地址",
+    prop: 'Address',
+    label: '地址',
     width: 180
   },
   {
-    prop: "Paragraph",
-    label: "描述",
+    prop: 'Paragraph',
+    label: '描述',
     width: undefined
   }
-];
+]
 export default {
-  name: "",
+  name: '',
   components: {},
-  created() {
-    this.getData();
-  },
   data() {
     return {
       columns: columns,
       tableData: []
-    };
+    }
+  },
+  created() {
+    this.getData()
   },
   methods: {
-    async getData(){
-      let result=await getDataFromApi()
-      console.log('-----> mock接口：getDataFromApi <------',result)
-      this.tableData=result.data
+    async getData() {
+      const result = await getDataFromApi()
+      console.log('-----> mock接口：getDataFromApi <------', result)
+      this.tableData = result.data
     },
     handleClick(row) {
-      window.open(row.Url);
+      window.open(row.Url)
     }
   }
-};
+}
 </script>
 
 <style scoped>

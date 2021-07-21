@@ -2,63 +2,63 @@
 <template>
   <div class="app-header">
     <a class="logo" @click="goHome">Lorena</a>
-    <el-tooltip class="item" effect="dark" :content="typename" placement="bottom">
+    <el-tooltip :content="typename" class="item" effect="dark" placement="bottom">
       <div class="user" @click="goUser">
-        <i class="usericon el-icon-user-solid" style="font-size:30px;color:white"></i>
-        <span style="color:white">{{username}}</span>
+        <i class="usericon el-icon-user-solid" style="font-size:30px;color:white"/>
+        <span style="color:white">{{ username }}</span>
       </div>
     </el-tooltip>
-    <div class="weater" v-if="weathercon">
-      <span>{{weathercon.citynm}} </span>
-      <span>{{weathercon.temperature}} </span>
-      <span>{{weathercon.weather}} </span>
-      <span>{{weathercon.week}}</span>
+    <div v-if="weathercon" class="weater">
+      <span>{{ weathercon.citynm }} </span>
+      <span>{{ weathercon.temperature }} </span>
+      <span>{{ weathercon.weather }} </span>
+      <span>{{ weathercon.week }}</span>
     </div>
     <el-tooltip class="item" effect="dark" content="退出" placement="bottom">
-      <i class="icon el-icon-switch-button" style="font-size:30px;color:rgb(52, 151, 251)" @click="unlogin"></i>
+      <i class="icon el-icon-switch-button" style="font-size:30px;color:rgb(52, 151, 251)" @click="unlogin"/>
     </el-tooltip>
   </div>
 </template>
 
 <script>
 export default {
-  name:'appheader',
-  props:{
-    weathercon:{
-      type:Object,
-      default:()=>{
+  name: 'Appheader',
+  components: {},
+  props: {
+    weathercon: {
+      type: Object,
+      default: () => {
         return {}
       }
     }
   },
-  data () {
+  data() {
     return {
-      typename:'',
-      username:''
-    };
+      typename: '',
+      username: ''
+    }
   },
-  created(){
+
+  computed: {},
+  created() {
     const userinfo = this.$store.state.login.userinfo
-    if(userinfo){
+    if (userinfo) {
       this.typename = userinfo.type.name
       this.username = userinfo.name
     }
   },
-  components: {},
-
-  computed: {},
-  mounted(){},
+  mounted() {},
 
   methods: {
-    goUser(){
+    goUser() {
       this.$router.push('/user/index')
     },
     /* 跳转首页 */
-    goHome(){
+    goHome() {
       this.$router.push('/home')
     },
     /* 退出登录，清除vuex和session中的token和uesrinfo */
-    unlogin(){
+    unlogin() {
       this.$confirm('即将退出系统登陆，是否继续？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',

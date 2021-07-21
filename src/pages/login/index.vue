@@ -9,33 +9,31 @@
         <el-form ref="form" :model="form" :rules="rules">
           <!-- 账号 -->
           <el-form-item prop="account">
-            <el-input placeholder="请输入账号（随意输）" v-model="form.account">
+            <el-input v-model="form.account" placeholder="请输入账号（随意输）">
               <i
-                class="el-icon-user-solid el-input__icon"
                 slot="prefix"
-                style="font-size: 18px;">
-              </i>
+                class="el-icon-user-solid el-input__icon"
+                style="font-size: 18px;"/>
             </el-input>
           </el-form-item>
           <!-- 密码 -->
           <el-form-item prop="password">
-            <el-input type="password" placeholder="请输入密码（随意输）" v-model="form.password" show-password>
+            <el-input v-model="form.password" type="password" placeholder="请输入密码（随意输）" show-password>
               <i
-                class="el-icon-key el-input__icon"
                 slot="prefix"
-                style="font-size: 18px;">
-              </i>
+                class="el-icon-key el-input__icon"
+                style="font-size: 18px;"/>
             </el-input>
           </el-form-item>
           <!-- 提交 -->
-        <el-form-item>
-          <el-row :gutter="20">
-            <el-col :span="24" :offset="13">
-              <el-button type="primary" @click="submitForm('form')">登录系统</el-button>
-              <el-button @click="resetForm('form')">重置</el-button>
-            </el-col>
-          </el-row>
-        </el-form-item>
+          <el-form-item>
+            <el-row :gutter="20">
+              <el-col :span="24" :offset="13">
+                <el-button type="primary" @click="submitForm('form')">登录系统</el-button>
+                <el-button @click="resetForm('form')">重置</el-button>
+              </el-col>
+            </el-row>
+          </el-form-item>
         </el-form>
       </div>
     </div>
@@ -44,11 +42,11 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      form:{
-        account:'',
-        password:''
+      form: {
+        account: '',
+        password: ''
       },
       rules: {
         account: [
@@ -58,11 +56,11 @@ export default {
           { required: true, message: '必填，请输入密码', trigger: 'blur' }
         ]
       }
-    };
+    }
   },
-  methods:{
+  methods: {
     /* 提交 */
-    submitForm(form){
+    submitForm(form) {
       this.$refs[form].validate(valid => {
         if (valid) {
           this.login()
@@ -71,16 +69,16 @@ export default {
     },
     /* 重置表单 */
     resetForm(form) {
-      this.$refs[form].resetFields();
+      this.$refs[form].resetFields()
     },
     /* 登录 */
-    login(){
+    login() {
       /*
        *  在这边可以进行登陆请求
        *  将请求返回的Token对象存到store中
        *  @Token  token对象
        */
-      let token = 'a94756da-2962-40ae-bdea-787fd02c9d92'
+      const token = 'a94756da-2962-40ae-bdea-787fd02c9d92'
       this.$store.commit('login/SET_TOKEN', token)
       this.$router.replace('home')
     }

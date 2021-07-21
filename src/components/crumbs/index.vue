@@ -1,40 +1,42 @@
 <!-- 面包屑 -->
 <template>
-    <div class="example-container">
-      <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item
-          :style="{'pointer-events':(prohibitClickList.indexOf(item.path) != -1 ?'none':'auto')}"
-          v-for="(item,index) in breadList" :key="item.name" :to="{ path: item.path }">
-          {{item.meta.title}}
-        </el-breadcrumb-item>
-      </el-breadcrumb>
-    </div>
+  <div class="example-container">
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item
+        v-for="item in breadList"
+        :style="{'pointer-events':(prohibitClickList.indexOf(item.path) != -1 ?'none':'auto')}"
+        :key="item.name"
+        :to="{ path: item.path }">
+        {{ item.meta.title }}
+      </el-breadcrumb-item>
+    </el-breadcrumb>
+  </div>
 </template>
 
 <script>
 export default {
-  name:'crumbs',
-  props:{
-    breadList:{
-      type:Array,
-      default:()=>{
+  name: 'Crumbs',
+  components: {},
+  props: {
+    breadList: {
+      type: Array,
+      default: () => {
         return []
       }
     }
   },
-  data () {
+  data() {
     return {
       // 禁止点击跳转的面包屑item
-      prohibitClickList:["/user","/oms"]
-    };
+      prohibitClickList: ['/user', '/oms']
+    }
   },
-  created(){
-  },
-  components: {},
 
   computed: {},
+  created() {
+  },
 
-  mounted(){},
+  mounted() {},
 
   methods: {}
 }
@@ -53,6 +55,5 @@ export default {
 //       pointer-events: none;
 //     }
 // }
-
 
 </style>

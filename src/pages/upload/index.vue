@@ -3,15 +3,15 @@
   <div>
     <div class="upone">
       <el-upload
-        class="avatar-uploader"
-        action="http://localhost:3000/api/upload"
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
-        :before-upload="beforeAvatarUpload">
+        :before-upload="beforeAvatarUpload"
+        class="avatar-uploader"
+        action="http://localhost:3000/api/upload">
         <img v-if="imageUrl" :src="imageUrl" class="avatar">
-        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        <i v-else class="el-icon-plus avatar-uploader-icon"/>
       </el-upload>
-      <p>{{imgName}}</p>
+      <p>{{ imgName }}</p>
     </div>
   </div>
 </template>
@@ -19,47 +19,47 @@
 <script>
 import { getImg } from '@/api/upload'
 export default {
-  name:'upload',
-  data () {
-    return {
-      imageUrl: '',
-      imgName:''
-    };
-  },
+  name: 'Upload',
 
   components: {},
+  data() {
+    return {
+      imageUrl: '',
+      imgName: ''
+    }
+  },
 
   computed: {},
-  created(){
+  created() {
     this.getImg()
   },
-  mounted(){},
+  mounted() {},
 
   methods: {
-    async getImg(){
-      let imgdata = await getImg()
-      this.imgName=imgdata.data.filename
-      this.imageUrl=imgdata.data.imgUrl
+    async getImg() {
+      const imgdata = await getImg()
+      this.imgName = imgdata.data.filename
+      this.imageUrl = imgdata.data.imgUrl
     },
     handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
-      this.imgName=file.response.filename;
+      this.imageUrl = URL.createObjectURL(file.raw)
+      this.imgName = file.response.filename
       this.$message({
-          message: '上传成功',
-          type: 'success'
-        })
+        message: '上传成功',
+        type: 'success'
+      })
     },
     beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg';
-      const isLt2M = file.size / 1024 / 1024 < 2;
+      const isJPG = file.type === 'image/jpeg'
+      const isLt2M = file.size / 1024 / 1024 < 2
 
       if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
+        this.$message.error('上传头像图片只能是 JPG 格式!')
       }
       if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!');
+        this.$message.error('上传头像图片大小不能超过 2MB!')
       }
-      return isJPG && isLt2M;
+      return isJPG && isLt2M
     }
   }
 }
